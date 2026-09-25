@@ -15,4 +15,4 @@ table inet server {
     }
 }
 EOF
-ncat -lk4C 8080 -m 50 -c 'nvim --headless -u NONE -i NONE -s server.vim 2>/dev/null' --output server.log
+ncat -lk4C 8080 -m 50 -c 'nvim --headless -n -u NONE -i NONE -s server.vim 2>/dev/null' --output server.log
