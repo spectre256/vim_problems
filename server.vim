@@ -2,8 +2,8 @@
 :let len=0
 :%g/^Content-Length: \zs\d\+/norm ygn:let len="
 :exe 'r!head -c ' . len . ' /proc/$PPID/fd/0'
-:1v/^GET/norm ggcGHTTP/1.1 405 Method Not AllowedConnection: close:wq!/dev/stdout
-:1s#\v^GET \zs(https?://localhost:8080)?/
+:1v/^GET /norm ggcGHTTP/1.1 405 Method Not AllowedAllow: GETConnection: close:wq!/dev/stdout
+:1s#\v^GET \zs(https?://localhost:8080)?/?
 :1s#^GET \zs/\S*#404.html
 :1s#^GET \zs\S*\.\.\S*#404.html
 :1s#^GET \zs\S*[~$]\S*#404.html
@@ -14,7 +14,6 @@
 :let mime='text/'.expand("%:e:s/\\v^((html$)@!\\a+|)$/plain/")
 gg"fyG
 ggcGHTTP/1.1 =status
-Content-Type: =mime
+Content-Type: =mime; charset=utf-8
 Connection: close
-
 "fp:wq!/dev/stdout
