@@ -5,9 +5,10 @@
 :%s#^GET \zs/\ze #/index.html
 :%s#^GET \zs\S*\.\.\S*\ze #/404.html
 :%s#\v^GET \zs/(\S*)\ze #\1
+:%s#^GET \zs[/~]#404.html
 :%g/^GET \zs\S\+/try | exe 'norm ngf' | cat | e 404.html | endt
 :let status=expand("%:t")=="404.html"?"404 Not Found":"200 OK"
-:let mime='text/'.expand("%:e:s/\\v<(html>)@!\\a+/plain/")
+:let mime='text/'.expand("%:e:s/\\v^((html$)@!\\a+|)$/plain/")
 gg"fyG
 ggcGHTTP/1.1 =status
 Content-Type: =mime
