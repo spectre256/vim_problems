@@ -10,6 +10,7 @@
 :1s#^GET \zs\S*[~$]\S*#404.html
 :1s#^GET \zs\ze #index.html
 :1s#^GET \zs#static/
+:1s#^GET \zs\S*#\=isdirectory(submatch(0))?'404.html':submatch(0)
 :1g/^GET \zs\S\+/try | exe 'norm ngf' | cat | e static/404.html | endt
 :let status=expand("%:t")=="404.html"?"404 Not Found":"200 OK"
 :let mimes={'html':'text/html','css':'text/css','json':'application/json'}
