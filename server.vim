@@ -3,7 +3,8 @@
 :exe "0r!timeout 0.5 sed -u \'/^[[:space:]]*$/q\' /proc/$PPID/fd/0" | if v:shell_error | exe 'norm @e' | en
 :let len=0 | %g/\c^content-length:\s*\zs\d\+/norm ygn:let len=str2nr(")
 :exe 'r!timeout 0.5 head -c '.len.' /proc/$PPID/fd/0' | if v:shell_error | exe 'norm @e' | en
-:1v/^GET /norm ggcGHTTP/1.1 405 Method Not AllowedAllow: GETConnection: close@q
+:let @h='"fp' | 1s/^HEAD/GET/ | let @h=''
+:1v/^GET /norm ggcGHTTP/1.1 405 Method Not AllowedAllow: GET, HEADConnection: close@q
 :1s#\v^GET \zs(https?://localhost:8080)?/?
 :1s#^GET \zs/\f*#404.html
 :1s#^GET \zs\f*\.\.\f*#404.html
@@ -19,4 +20,4 @@ gg"fyG
 ggcGHTTP/1.1 =status
 Content-Type: =mime; charset=utf-8
 Connection: close
-"fp@q
+@h@q
