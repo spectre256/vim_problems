@@ -15,7 +15,7 @@
 :1s#^GET \zs\f*#\=isdirectory(submatch(0))?'static/404.html':submatch(0)
 :1g/^GET \zs\f*/try | exe 'norm gngf' | cat | e static/404.html | endt
 :let status=expand("%:t")=="404.html"?"404 Not Found":"200 OK"
-:let mimes={'html':'text/html','css':'text/css','js':'text/javascript','json':'application/json'}
+:let mimes=readfile("mimes.txt")->join()->eval()
 :let mime=expand("%:e:s/.*/\\L\\0/:s#.*#\\=get(mimes,submatch(0),'text/plain')#")
 ggIHTTP/1.1 =status
 Content-Type: =mime

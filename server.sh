@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
 sudo nft -f - <<'EOF'
 table inet server {}
 delete table inet server
@@ -15,4 +15,5 @@ table inet server {
     }
 }
 EOF
+[[ -f mimes.txt ]] || nvim --headless -n -u NONE -i NONE -s mimes.vim
 ncat -lk4 8080 -m 50 -c 'nvim --headless -n -u NONE -i NONE -s server.vim 2>/dev/null' --output server.log
