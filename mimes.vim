@@ -1,5 +1,5 @@
 :let url='https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/MIME_types/Common_types'
-:exe 'r!curl -sSL --fail '.url | if v:shell_error | q! | en
+:exe 'r!curl -sSL --fail '.url | if v:shell_error | cq! | en
 /figure class="table-container"
 datggVGP
 :%v/<code>/d
