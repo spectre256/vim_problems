@@ -15,5 +15,5 @@ table inet server {
     }
 }
 EOF
-[[ -f mimes.txt ]] || nvim --headless -n -u NONE -i NONE -s mimes.vim
+[[ -f mimes.txt ]] || nvim --headless -n -u NONE -i NONE -s mimes.vim 2>/dev/null || { echo "Error generating mimes.txt"; exit 1; }
 ncat -lk4 8080 -m 50 -c 'nvim --headless -n -u NONE -i NONE -s server.vim 2>/dev/null' --output server.log

@@ -1,4 +1,5 @@
-:r!curl https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/MIME_types/Common_types
+:let url='https://developer.mozilla.org/en-US/docs/Web/HTTP/Guides/MIME_types/Common_types'
+:exe 'r!curl -sSL --fail '.url | if v:shell_error | q! | en
 /figure class="table-container"
 datggVGP
 :%v/<code>/d
@@ -7,4 +8,6 @@ datggVGP
 :%norm vitovitd0PlD
 :%s/\v\.(.*)\n(.*)/'\1':'\2',
 :%j!
-I{A}:x mimes.txt
+I{
+:$s/,\?$/}
+:x mimes.txt
