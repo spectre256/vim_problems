@@ -5,6 +5,7 @@
 :let len=0 | %g/\c^content-length:\s*\zs\d\+/norm ygn:let len=str2nr(")
 :exe 'r!timeout 0.5 head -c '.len.' /proc/$PPID/fd/0' | if v:shell_error | exe 'norm @e' | en
 :let @h='' | 1s/^HEAD/GET/ | let @h='cG:se noeol'
+:1g/^BREW /exe "norm ggcGHTTP/1.1 418 I'm a teapot\<C-v>\r\rConnection: close\<C-v>\r\r\<C-v>\r\r@q"
 :1v/^GET /exe "norm ggcGHTTP/1.1 405 Method Not Allowed\<C-v>\r\rAllow: GET, HEAD\<C-v>\r\rConnection: close\<C-v>\r\r\<C-v>\r\r@q"
 :1s#\v^GET \zs(https?://localhost:8080)?/?
 :1s#^GET \zs/\f*#404.html
@@ -20,6 +21,7 @@
 :let mime=expand("%:e:s/.*/\\L\\0/:s#.*#\\=get(mimes,submatch(0),'text/plain')#")
 gggIHTTP/1.1 =status
 Content-Type: =mime
+Server: NVIM/=execute('ve')->split()[1][1:]
 Connection: close
 
 @h@q
