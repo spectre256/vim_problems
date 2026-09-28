@@ -8,15 +8,15 @@
 :1g/^BREW /exe "norm ggcGHTTP/1.1 418 I'm a teapot\<C-v>\r\rConnection: close\<C-v>\r\r\<C-v>\r\r@q"
 :1v/^GET /exe "norm ggcGHTTP/1.1 405 Method Not Allowed\<C-v>\r\rAllow: GET, HEAD\<C-v>\r\rConnection: close\<C-v>\r\r\<C-v>\r\r@q"
 :1s#\v^GET \zs(https?://localhost:8080)?/?
-:1s#^GET \zs/\f*#404.html
-:1s#^GET \zs\f*\.\.\f*#404.html
-:1s#^GET \zs\f*[~$]\f*#404.html
+:1s#^GET \zs/\f*#four_oh_four.html
+:1s#^GET \zs\f*\.\.\f*#four_oh_four.html
+:1s#^GET \zs\f*[~$]\f*#four_oh_four.html
 :1s#^GET \zs\ze\f\@!#index.html
 :1s#^GET \zs#static/
-:1s#^GET \zs\f*#\=isdirectory(submatch(0))?'static/404.html':submatch(0)
-:1g/^GET \zs\f*/try | exe 'norm gngf' | cat | e static/404.html | endt
+:1s#^GET \zs\f*#\=isdirectory(submatch(0))?'static/four_oh_four.html':submatch(0)
+:1g/^GET \zs\f*/try | exe 'norm gngf' | cat | e static/four_oh_four.html | endt
 :se noai | let &eol=&eol&&getfsize(@%)>0
-:let status=expand("%:t")=="404.html"?"404 Not Found":"200 OK"
+:let status=expand("%:t")=="four_oh_four.html"?"404 Not Found":"200 OK"
 :try | let mimes=eval(join(readfile("mimes.txt"))) | cat | let mimes={} | endt
 :let mime=expand("%:e:s/.*/\\L\\0/:s#.*#\\=get(mimes,submatch(0),'text/plain')#")
 gggIHTTP/1.1 =status
