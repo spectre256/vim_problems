@@ -10,8 +10,6 @@ i
 'Enter any additional earnings:  ' '\v\s*(\$?\d+(\.\d{1,2})?\s*)*' '\=page1."f1_47[0] (".Sum(submatch(0)).")"' 'Earnings must be a space-separated list of numbers'
 
 :3,4g/your/t. | s/your\zs/ spouse''s/g | s/f1_\zs\d\d/\=submatch(0)+3/g
-:%s/\v('([^']|'')*') '([^']*)' '([^']*)' '(([^']|'')*)'/:exe "pu=input(\1)" | try | s#\3#\4# | exe 'norm @c' | cat | echom '\5' | endt/
-Go
-:let @c=':try | %g#c1_8\[0] /On## | %g/spouse/d | fina | let @c="" | exe "norm 2G@c" | endt'
-:"let @c=':try | %g#c1_8\[0] /On## | %g/spouse/d | fina | let @c="ddk@\"" | exe "norm 2G@c" | endt'
+:%s/\v('([^']|'')*') '([^']*)' '([^']*)' '(([^']|'')*)'/:exe "pu=input(\1)" | try | s#\3#\4# | exe 'sil norm @c' | cat | echom '\5' | endt/
+:let @c=':try | exe ''/c1_8\[0] \/On'' | exe ''%g/spouse/d'' | cat | fina | let @c="" | exe "norm 2G@c" | endt'
 2Gddk@"
