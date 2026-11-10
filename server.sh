@@ -7,10 +7,10 @@ table inet server {
         type filter hook input priority 0; policy accept;
 
         tcp dport 8080 ct state new \
-            meter conn_rate { ip saddr limit rate over 10/minute } \
+            meter conn_rate { ip saddr limit rate over 300/minute burst 150 packets } \
             counter drop
         tcp dport 8080 \
-            meter conn_count { ip saddr ct count over 5 } \
+            meter conn_count { ip saddr ct count over 16 } \
             counter reject
     }
 }

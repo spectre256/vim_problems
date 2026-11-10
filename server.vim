@@ -13,7 +13,7 @@
 :1s#^GET \zs\f*[~$]\f*#four_oh_four.html
 :1s#^GET \zs\ze\f\@!#index.html
 :1s#^GET \zs#static/
-:1s#^GET \zs\f*#\=isdirectory(submatch(0))?'static/four_oh_four.html':submatch(0)
+:1s#^GET \zs\f*#\=isdirectory(submatch(0))?trim(submatch(0),'/',2).'/index.html':submatch(0)
 :1g/^GET \zs\f*/try | exe 'norm gngf' | cat | e static/four_oh_four.html | endt
 :se noai | let &eol=&eol&&getfsize(@%)>0
 :let status=expand("%:t")=="four_oh_four.html"?"404 Not Found":"200 OK"
