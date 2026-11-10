@@ -4,7 +4,8 @@
 :" parse tax table
 :" define tax fn
 :" table of: cond var prompt spec error fn
-:let Sum={str->str->split()->reduce({acc,x->acc+x->substitute(",","","g")->matchstr("\\$\\?\\zs.*")->str2float()},0.0)->printf("$%.2f")}
+:let Sum={str->str->split()->reduce({acc,x->acc+x->substitute(",","","g")->matchstr("\\$\\?\\zs.*")->str2float()},0.0)}
+:let Show={n->n->round()->printf("%.0f")}
 i1 married "Are you married or single? (m[arried]|s[ingle]) " '\v^(m%[arried]|s%[ingle])$' 'Invalid marital status' {s->s[0]=='m'}
 1 name "What is your full name? (first [m] last) " '\v^\w+(\s+\w\.?)?\s+(\w+)$' 'Please provide your full name, with no spaces except between first, middle initial, and last' {s->{ss->len(ss)==2?ss:[ss[0:1]->join()->matchstr('[^.]*'),ss[2]]}(s->split())}
 1 ssn "What is your SSN? (xxx-xx-xxxx) " '\v^\d{3}-\d\d-\d{4}$' 'Invalid SSN' {s->s->substitute('[^0-9]', '', 'g')}
@@ -13,6 +14,9 @@ i1 married "Are you married or single? (m[arried]|s[ingle]) " '\v^(m%[arried]|s%
 
 :%g/your/t. | s/\v^(\S+) /married\&\&\1 spouse_/ | s/your\zs/ spouse's/
 Gi:::
+:let line_1a=earnings+get(g:,'spouse_earnings',0)
+:let line_1z=line_1a
+:let line_9=line_1z
 i%FDF-1.2
 1 0 obj
 << /FDF << /Fields [
@@ -23,12 +27,15 @@ i%FDF-1.2
 << /T (page1.f1_18[0]) /V (=get(g:,'spouse_name',['',''])[1]) >>
 << /T (page1.f1_19[0]) /V (=get(g:,'spouse_ssn','')) >>
 << /T (page1.Checkbox_ReadOrder[0].c1_8[=married]) /V /=married+1 >>
+<< /T (page1.f1_47[0]) /V (=Show(line_1a)) >>
+<< /T (page1.f1_57[0]) /V (=Show(line_1z)) >>
+<< /T (page2.c2_17[0]) /V /2 >>
 ] >> >>
 endobj
 trailer
 << /Root 1 0 R >>
 %%EOFk
-:%s/page1/topmostSubform[0].Page1[0]
+:%s/page\(\d\+\)/topmostSubform[0].Page\1[0]
 :!curl -fsSLO https://www.irs.gov/pub/irs-pdf/f1040.pdf 
 :w !pdftk f1040.pdf fill_form - output f1040.filled.pdf
 :!xdg-open f1040.filled.pdf
