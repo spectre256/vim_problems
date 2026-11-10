@@ -254,7 +254,7 @@ nvim --headless -n -u NONE -i NONE -s solution.vim input.txt
 
 <v-clicks>
 
-- `-u NONE` — no config, no plugins, no mercy
+- `-u NONE` — no config, no plugins
 - `-s` — `:so!` at startup: the script is **keystrokes**, Vim "types" it for you
 - whatever's left in the buffer is the answer
 
@@ -437,7 +437,7 @@ One generation per run
 ```vim-run
 script: ../life.vim
 show: script
-attrs: {all|all|2-3|4|5|all}
+attrs: {all|all|2-3|4-5|all}
 ```
 
 ::input::
@@ -532,6 +532,20 @@ attrs: {all}{maxHeight:'380px'}
 ```
 
 ---
+layout: fact
+---
+
+# One more thing...
+
+<v-clicks>
+
+## You're looking at it
+
+These slides are being served by Vim, **right now**.
+
+</v-clicks>
+
+---
 
 # Web Server
 
@@ -565,24 +579,9 @@ attrs: {all}
 ```
 
 ---
-layout: fact
----
-
-# One more thing...
-
-<v-clicks>
-
-## You're looking at it
-
-These slides are being served by Vim, **right now**.
-
-</v-clicks>
-
----
 layout: end
 ---
 
 # :wq
 
 thanks!
-
