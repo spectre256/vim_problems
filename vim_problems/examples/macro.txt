@@ -1,0 +1,6 @@
+vim
+:)
+emacs
+:|
+notepad
+:(

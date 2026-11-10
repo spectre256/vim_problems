@@ -1,0 +1,17 @@
+{
+  "name": "vim_problems",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "build": "slidev build",
+    "build:vim": "rm -rf ../static/slides && slidev build --base /slides/ --out ../static/slides",
+    "dev": "slidev --open",
+    "export": "slidev export"
+  },
+  "dependencies": {
+    "@slidev/cli": "^53.1.0",
+    "@slidev/theme-default": "latest",
+    "@slidev/theme-seriph": "latest",
+    "vue": "^3.5.33"
+  }
+}

@@ -1,3 +1,4 @@
 *.log
 mimes.txt
 static/thing*
+static/slides/

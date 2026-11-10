@@ -1,0 +1,5 @@
+buy milk
+TODO: learn vim
+walk dog
+TODO: quit vim
+TODO: file taxes

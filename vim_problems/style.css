@@ -1,0 +1,22 @@
+/* shared look for the Normal Mode / Ex Commands reference slides */
+:root {
+  --c-range: #c2410c; /* where:  1  %  2,$-2  /pat/ */
+  --c-cmd:   #1d6fa5; /* what:   s  g  norm  gn  @   */
+  --c-body:  #8b3fa8; /* how:    /pat/rep/  /re/p    */
+  --c-reg:   #ca8a04; /* registers: " a-z 0-9 - : . */
+}
+.c-range { color: var(--c-range); }
+.c-cmd   { color: var(--c-cmd); }
+.c-body  { color: var(--c-body); }
+.c-reg   { color: var(--c-reg); }
+
+.ex-sub  { font-size: 1.3rem; opacity: .8; margin-top: .25rem; }
+.ex-grid { display: grid; grid-template-columns: 16rem 1fr; column-gap: 2.5rem; row-gap: .75rem; align-items: baseline; margin-top: 1.5rem; }
+.ex-head { font-size: .85rem; text-transform: uppercase; letter-spacing: .12em; opacity: .5; border-bottom: 1px solid currentColor; padding-bottom: .3rem; }
+.ex-cmd  { font-family: var(--slidev-code-font-family, monospace); font-size: 2rem; line-height: 1.1; }
+.ex-desc { font-size: 1.4rem; }
+.ex-sep  { color: var(--slidev-theme-default-color, #888); opacity: .5; }
+
+/* Registers slide */
+.ex-cmd-sm       { font-size: 1.5rem; letter-spacing: .3em; white-space: nowrap; }
+.ex-note-static  { font-size: 1.1rem; opacity: .75; margin-top: .2rem; }

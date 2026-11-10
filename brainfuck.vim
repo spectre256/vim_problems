@@ -6,7 +6,7 @@
 :%s/+/@w/g
 :%s/-/@w/g
 :%s/\./:let @o.=nr2char()/g
-:%s/,/ciw=char2nr(input("Enter char: ")[0])/g
+:%s/,/ciW=char2nr(input("Enter char: ")[0])/g
 qqqqq
 :%s/\[\([^[\]]*\(\n[^[\]]*\)*\)]/\=":wh expand('<cword>')!=0 | exe 'norm ".substitute(substitute(submatch(1), "'", "''", "g"), "[[:cntrl:]]", "\<C-v>\&", "g")."' | endwh\r"/g
 @qq@q
